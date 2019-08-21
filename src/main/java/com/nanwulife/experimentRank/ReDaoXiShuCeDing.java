@@ -50,7 +50,7 @@ public class ReDaoXiShuCeDing {
         }
 
         for (int i = 0; i < blank.length; i++) {
-            if (blank[i].isEmpty() || blank[i].equals("NaN") ||blank[i] =="") {
+            if (blank[i].isEmpty() || blank[i].equals("NaN") || blank[i] == "" || i == 55) {
                 blank[i] = "-1";
             }
             this.blank[i] = Float.parseFloat(blank[i]);
