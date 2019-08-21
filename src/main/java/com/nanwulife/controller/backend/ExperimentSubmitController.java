@@ -991,6 +991,96 @@ public class ExperimentSubmitController {
     }
 
 
+    /**
+     * 10
+     * @param session
+     * @param choice
+     * @param blank
+     * @return
+     */
+    @RequestMapping(value = "Exp_10.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse submitExp_10(HttpSession session, @RequestParam(value = "choice[]", required = false)
+            String[] choice, @RequestParam(value = "blank[]", required = false) String[] blank) {
+
+        
+
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(Const.ResponseCode.NEED_LOGIN.getCode(), Const.ResponseCode.NEED_LOGIN.getDesc());
+        }
+        int rank = 0;
+        int stu_class = iUserService.queryMajornameAndClassByNum(user.getStuNum()).getStuClass();
+        String major_name = iUserService.queryMajornameAndClassByNum(user.getStuNum()).getMajorName();
+        String wordPath = new PropertiesUtil("server.properties").readProperty("report.word.server.path");
+        String chartPath = new PropertiesUtil("server.properties").readProperty("report.chart.server.path");
+        String basePath;
+        String path;
+        Map<String, Object> params = new HashMap<String, Object>();
+        ServerResponse serverResponse = iScoreService.isStuHaveScore(10, user.getId());
+        if (serverResponse.getStatus() == 15) {
+            //报告重复提交
+            return serverResponse;
+        }
+        serverResponse = iExperimentService.getExpStatus(10);
+        if (serverResponse.getStatus() == 10){
+            //实验已关闭
+            return serverResponse;
+        }
+
+        if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+            basePath = new PropertiesUtil("server.properties").readProperty("report.server.linux.basePath");
+        } else if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+            basePath = new PropertiesUtil("server.properties").readProperty("report.server.macos.basePath");
+        } else {
+            basePath = new PropertiesUtil("server.properties").readProperty("report.server.win.basePath");
+        }
+
+        //=============================模板标记==============================
+
+        for (int i = 0; i < choice.length; i++) {
+            params.put("choice_" + (i + 1) + "", choice[i]);
+        }
+
+        for (int i = 0; i < blank.length; i++) {
+            params.put("blank_" + (i + 1) + "", blank[i]);
+        }
+
+
+
+        rank = (new ReDaoXiShuCeDing(choice,blank)).getScore();
+
+        params.put("name", user.getStuName());
+        params.put("num", user.getStuNum());
+        params.put("classno", major_name + user.getStuClass());
+        params.put("score", rank);
+
+        params.put("pic1", new PictureRenderData(625, 326, basePath + chartPath + user.getStuNum() + "/10-1.png"));
+        params.put("pic2", new PictureRenderData(625, 326, basePath + chartPath + user.getStuNum() + "/10-2.png"));
+        //=============================模板标记==============================
+
+        path = basePath + wordPath + "导热系数的测定" + "/" + major_name + stu_class + "/";
+        File filedir = new File(path);
+        if (!filedir.exists()) {
+            filedir.setWritable(true);
+            filedir.mkdirs();
+        }
+        try {
+            WordToNewWordUtil.templateWrite2(
+                    basePath + "导热系数的测定.docx",
+                    params, path + user.getStuNum() + user.getStuName() + ".docx");
+        } catch (Exception e) {
+            System.out.println("写入模板异常");
+            e.printStackTrace();
+        }
+
+        Score score = new Score();
+        score.setStuId(user.getId());
+        score.setExpId(10);
+        score.setScore(rank);
+        user = null;
+        return iScoreService.submit(score);
+    }
 
 
 }

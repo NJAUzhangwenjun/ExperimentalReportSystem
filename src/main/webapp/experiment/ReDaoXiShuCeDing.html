@@ -19,6 +19,7 @@
     <![endif]-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <script src="../assets/js/biz/myChats/echarts.js"></script>
+
 </head>
 <body class="animated fadeInRightBig container">
 
@@ -213,16 +214,16 @@
                                 <table class="table table-bordered table-striped table-condensed">
                                     <tr>
                                         <td>\(h_B / mm\)</td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
+                                        <td><input type="text" id="input_1"></td>
+                                        <td><input type="text" id="input_2"></td>
+                                        <td><input type="text" id="input_3"></td>
+                                        <td><input type="text" id="input_4"></td>
+                                        <td><input type="text" id="input_5"></td>
+                                        <td><input type="text" id="input_6"></td>
                                     </tr>
                                 </table>
                             </div>
-                            <p>厚度平均值:\(h_B = \)  <input type="text"> m.</p>
+                            <p>厚度平均值:\(h_B = \)  <input type="text"  id="input_7"> m.</p>
                         </div>
 
                         <div>
@@ -231,46 +232,47 @@
                                 <table class="table table-bordered table-striped table-condensed">
                                     <tr>
                                         <td>\(D_B / mm\)</td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
+                                        <td><input type="text" id="input_8"></td>
+                                        <td><input type="text" id="input_9"></td>
+                                        <td><input type="text" id="input_10"></td>
+                                        <td><input type="text" id="input_11"></td>
+                                        <td><input type="text" id="input_12"></td>
+                                        <td><input type="text" id="input_13"></td>
                                     </tr>
                                 </table>
                             </div>
-                            <p>半径平均值:\(R_B = \) <input type="text"> m.</p>
-                            <p>加热盘设定温度\(T_{1} = \) <input type="text">  ℃; </p>
-                            <p>散热盘稳态温度\(T_{2} = \) <input type="text">  ℃; </p>
+                            <p>半径平均值:\(R_B = \) <input type="text" id="input_14"> m.</p>
+                            <p>加热盘设定温度\(T_{1} = \) <input type="text" id="input_15">  ℃; </p>
+                            <p>散热盘稳态温度\(T_{2} = \) <input type="text" id="input_16">  ℃; </p>
                             <p>自然冷却数据记录表：</p>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed">
                                     <tr>
                                         <td>时刻t(s)</td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
+                                        <td><input type="text" id="input_17"></td>
+                                        <td><input type="text" id="input_18"></td>
+                                        <td><input type="text" id="input_19"></td>
+                                        <td><input type="text" id="input_20"></td>
+                                        <td><input type="text" id="input_21"></td>
                                     </tr>
                                     <tr>
                                         <td>温度T2（℃）</td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
+                                        <td><input type="text" id="input_22"></td>
+                                        <td><input type="text" id="input_23"></td>
+                                        <td><input type="text" id="input_24"></td>
+                                        <td><input type="text" id="input_25"></td>
+                                        <td><input type="text" id="input_26"></td>
                                     </tr>
                                 </table>
                             </div>
                             <div>
                                 <p>T-t曲线:
-                                <div id="main2" class="body" style="width: 100%;height: 400px;">
+                                <div id="main1" class="body" style="width: 100%;height: 400px;">
 
                                 </div>
                             </div>
-                            <p>\(\Delta T / \Delta t =\) pasdf ℃/s</p>
+                            <button class="btn btn-primary" onclick="productDataAndPicture1()">生成曲线</button>
+                            <p>\(\Delta T / \Delta t =\)  <td><input type="text" id="input_27"></td> ℃/s</p>
                         </div>
                     </div>
                     <div>
@@ -282,16 +284,16 @@
                                 <table class="table table-bordered table-striped table-condensed">
                                     <tr>
                                         <td>\(h_B / mm\)</td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
+                                        <td><input type="text" id="input_28"></td>
+                                        <td><input type="text" id="input_29"></td>
+                                        <td><input type="text" id="input_30"></td>
+                                        <td><input type="text" id="input_31"></td>
+                                        <td><input type="text" id="input_32"></td>
+                                        <td><input type="text" id="input_33"></td>
                                     </tr>
                                 </table>
                             </div>
-                            <p>厚度平均值:\(h_B = \)  <input type="text"> m.</p>
+                            <p>厚度平均值:\(h_B = \)  <input type="text" id="input_34"> m。</p>
                         </div>
 
                         <div>
@@ -300,46 +302,47 @@
                                 <table class="table table-bordered table-striped table-condensed">
                                     <tr>
                                         <td>\(D_B / mm\)</td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
+                                        <td><input type="text" id="input_35"></td>
+                                        <td><input type="text" id="input_36"></td>
+                                        <td><input type="text" id="input_37"></td>
+                                        <td><input type="text" id="input_38"></td>
+                                        <td><input type="text" id="input_39"></td>
+                                        <td><input type="text" id="input_40"></td>
                                     </tr>
                                 </table>
                             </div>
-                            <p>半径平均值:\(R_B = \) <input type="text"> m.</p>
-                            <p>加热盘设定温度\(T_{1} = \) <input type="text">  ℃; </p>
-                            <p>散热盘稳态温度\(T_{2} = \) <input type="text">  ℃; </p>
+                            <p>半径平均值:\(R_B = \) <input type="text"  id="input_41"> m.</p>
+                            <p>加热盘设定温度\(T_{1} = \) <input type="text" id="input_42">  ℃; </p>
+                            <p>散热盘稳态温度\(T_{2} = \) <input type="text" id="input_43">  ℃; </p>
                             <p>自然冷却数据记录表：</p>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed">
                                     <tr>
                                         <td>时刻t(s)</td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
+                                        <td><input type="text" id="input_44"></td>
+                                        <td><input type="text" id="input_45"></td>
+                                        <td><input type="text" id="input_46"></td>
+                                        <td><input type="text" id="input_47"></td>
+                                        <td><input type="text" id="input_48"></td>
                                     </tr>
                                     <tr>
                                         <td>温度T2（℃）</td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
-                                        <td><input type="text"></td>
+                                        <td><input type="text" id="input_49"></td>
+                                        <td><input type="text" id="input_50"></td>
+                                        <td><input type="text" id="input_51"></td>
+                                        <td><input type="text" id="input_52"></td>
+                                        <td><input type="text" id="input_53"></td>
                                     </tr>
                                 </table>
                             </div>
                             <div>
                                 <p>T-t曲线:
-                                <div class="body" id="main" style="width: 100%;height: 360px;">
+                                <div class="body" id="main2" style="width: 100%;height: 360px;">
 
                                 </div>
                             </div>
-                            <p>\(\Delta T / \Delta t =\) pasdf ℃/s</p>
+                            <button class="btn btn-primary" onclick="productDataAndPicture2()">生成曲线</button>
+                            <p>\(\Delta T / \Delta t =\)  <td><input type="text" id="input_54"></td> ℃/s</p>
                         </div>
                     </div>
                     <div>
@@ -352,13 +355,13 @@
                             <table class="table table-bordered table-striped table-condensed">
                                 <tr>
                                     <td>样品</td>
-                                    <td>1:<input type="text"></td>
+                                    <td>1:<input type="text" id="input_55"></td>
                                     <td>2:石英玻璃</td>
                                 </tr>
                                 <tr>
                                     <td><img style="height: 22px;width: 84px" src="./assets/images/10_5.png" alt=""></td>
-                                    <td>pasdf</td>
-                                    <td>pasdf</td>
+                                    <td><input type="text" id="input_56"></td>
+                                    <td><input type="text" id="input_57"></td>
                                 </tr>
                             </table>
                         </div>
@@ -377,7 +380,9 @@
     <br>
 </div>
 </div>
-
+<div id="footer-sec">
+    Copyright &copy; <a href="#">2019张文军</a>
+</div>
 
 <style>
     input {
@@ -400,10 +405,15 @@
     }
 </style>
 
-<script src="../assets/js/biz/myChats/myEcharts.js"></script>
+<!--自定义js-->
+<!--<script src="../assets/js/biz/ReDaoXiShuCeDing.js"></script>&lt;!&ndash;&ndash;&gt;-->
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="../assets/js/biz/ReDaoXiShuCeDing.js" ></script>
+<script src="../assets/js/ecStat.js"></script>
+<script src="../assets/js/biz/myChats/charts10.js"></script>
+
 </body>
 </html>
