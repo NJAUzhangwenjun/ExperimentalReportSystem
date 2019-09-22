@@ -21,11 +21,11 @@ public class SolarEnergyExperiment {
     private double FF2;
     private int rank = 0;
 
-    public SolarEnergyExperiment(String choice_1, String choice_2, 
-                                 String choice_3, String choice_4, 
-                                 String choice_5, String choice_6, 
-                                 String choice_7, String choice_8, 
-                                 String choice_9, String choice_10, 
+    public SolarEnergyExperiment(String choice_1, String choice_2,
+                                 String choice_3, String choice_4,
+                                 String choice_5, String choice_6,
+                                 String choice_7, String choice_8,
+                                 String choice_9, String choice_10,
                                  double FF1, double FF2) {
         this.choice_1 = choice_1;
         this.choice_2 = choice_2;
@@ -54,13 +54,13 @@ public class SolarEnergyExperiment {
             rank += 4;
         if (choice_6.equals("B"))
             rank += 4;
-        if (choice_7.equals("C"))
+        if (choice_7.equals("D"))
             rank += 4;
-        if (choice_8.equals("D"))
+        if (choice_8.equals("C"))
             rank += 4;
-        if (choice_9.equals("D"))
+        if (choice_9.equals("C"))
             rank += 4;
-        if (choice_10.equals("C"))
+        if (choice_10.equals("D"))
             rank += 4;
         if (FF1 > 0.8 || FF1 < 0.3)
             rank += 20;
@@ -72,6 +72,6 @@ public class SolarEnergyExperiment {
             rank += 30;
         return rank;
     }
-    
-    
+
+
 }

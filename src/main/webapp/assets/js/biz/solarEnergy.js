@@ -267,8 +267,8 @@ function generateChart2() {
     $("#table2_54").val(table2_y27);
 
     $("#table2_i").val(table2_y1);
-    $("#table2_u").val(6.1);
-    $("#table2_ff").val(ff($("#table1_p").val(), table2_y1, 6.1));
+    $("#table2_u").val(5.7);
+    $("#table2_ff").val(ff($("#table1_p").val(), table2_y1, 5.7));
 
     var ctx = document.getElementById('chart2').getContext('2d');
     chart2 = new Chart(ctx, {
@@ -540,8 +540,8 @@ function generateChart4() {
     $("#table4_54").val(table4_y27);
 
     $("#table4_i").val(table4_y1);
-    $("#table4_u").val(6.1);
-    $("#table4_ff").val(ff($("#table3_p").val(), table4_y1, 6.1));
+    $("#table4_u").val(5.7);
+    $("#table4_ff").val(ff($("#table3_p").val(), table4_y1, 5.7));
 
     var ctx = document.getElementById('chart4').getContext('2d');
     chart4 = new Chart(ctx, {
@@ -651,40 +651,40 @@ function submit() {
     var table4 = new Array();
     var result = new Array();
 
-    
+
     for (var i = 1; i <= 10; i++) {
         selectval[i - 1] = $("#choice_" + i).val();
     }
-    
+
     for (var i = 1; i <= 42; i++) {
         if (i <= 9)
             table1[i - 1] = $("#table1_0" + i + "" ).val();
         else
             table1[i - 1] = $("#table1_"  + i + "" ).val();
-        
+
     }
-    
+
     for (var i = 1; i <= 54; i++) {
         if (i <= 9)
             table2[i - 1] = $("#table2_0" + i + "" ).val();
         else
             table2[i - 1] = $("#table2_"  + i + "" ).val();
     }
-    
+
     for (var i = 1; i <= 42; i++) {
         if (i <= 9)
             table3[i - 1] = $("#table3_0" + i + "" ).val();
         else
             table3[i - 1] = $("#table3_"  + i + "" ).val();
     }
-    
+
     for (var i = 1; i <= 54; i++) {
         if (i <= 9)
             table4[i - 1] = $("#table4_0" + i + "" ).val();
         else
             table4[i - 1] = $("#table4_"  + i + "" ).val();
     }
-    
+
     result[0] = $("#table1_p").val();
     result[1] = $("#table2_i").val();
     result[2] = $("#table2_u").val();

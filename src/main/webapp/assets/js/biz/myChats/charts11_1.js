@@ -137,7 +137,9 @@ function becomeEcharts(optionNum, mainId, outdataUhs, myRegression) {
                 max: 8,
                 interval: 1,
                 axisLabel: {
-                    formatter: '{value} '
+                    formatter: function (value) {
+                        return value / 10;
+                    }
                 },
                 name: "I/A",
 
