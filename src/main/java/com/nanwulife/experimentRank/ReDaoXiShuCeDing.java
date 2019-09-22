@@ -90,8 +90,8 @@ public class ReDaoXiShuCeDing {
 
         Boolean flag1 = true;
         for (int i = 0; i < 5; i++) {
-            if (blank[i + 16] + 30 != blank[i + 17]) {
-                flag1 = false;
+            if (blank[i + 16] + 30 == blank[i + 17]) {
+                flag1 = true;
             }
         }
         if (flag1) {
@@ -116,8 +116,8 @@ public class ReDaoXiShuCeDing {
 
         Boolean flag2 = true;
         for (int i = 0; i < 5; i++) {
-            if (blank[i + 43] + 30 != blank[i + 44]) {
-                flag2 = false;
+            if (blank[i + 43] + 30 == blank[i + 44]) {
+                flag2 = true;
             }
         }
         if (flag2) {

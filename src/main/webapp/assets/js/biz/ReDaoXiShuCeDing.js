@@ -46,6 +46,7 @@ $(function () {
 
 function submitAll() {
 
+
     if (confirm("为避免数据丢失，提交前请先将实验数据截图，确认提交吗？")) {
         uploadChart("chart1", 1);
         uploadChart("chart2", 2);
@@ -100,12 +101,21 @@ var outdataUhs = new Array();
 var myRegression;
 
 function productDataAndPicture1() {
+
+
+    /**
+     * 计算页面均值
+     */
+    add("#input_7", 1, 6, 6000);
+    add("#input_14", 8, 6, 12000);
+
+
     var table = new Array();
     /**
      * 获取表单数据
      */
     for (var i = 1; i <= 10; i++) {
-        table[i - 1] = $("#input_" + (i+16) + "").val();
+        table[i - 1] = $("#input_" + (i + 16) + "").val();
     }
 
     /**
@@ -113,8 +123,8 @@ function productDataAndPicture1() {
      */
     for (var i = 1; i <= 5; i++) {
         var data1 = new Array();
-        data1[0] = parseFloat(table[i-1]);
-        data1[1] = parseFloat(table[i-1+5]);
+        data1[0] = parseFloat(table[i - 1]);
+        data1[1] = parseFloat(table[i - 1 + 5]);
         outdataUhs[i - 1] = data1;
     }
 
@@ -132,19 +142,32 @@ function productDataAndPicture1() {
 
     var t = table[0] - table[4];
     var T = table[5] - table[9];
-    var number = Math.abs(t) / Math.abs(T);
 
-    $("#input_27").attr("value",  number.toFixed(2));
+    var number = Math.abs(T) / Math.abs(t);
+
+    $("#input_27").attr("value", number.toFixed(4));
+
+
+    //function addParameter(getElementId,toDataId,hh1Id,rr1Id,t1Id,t2Id)
+
+    addParameter("#input_27", "#input_56", "#input_7", "#input_14", "#input_15", "#input_16");
 }
 
 
 function productDataAndPicture2() {
+
+    /**
+     * 计算页面均值
+     */
+    add("#input_34", 28, 6, 6000);
+    add("#input_41", 35, 6, 12000);
+
     var table = new Array();
     /**
      * 获取表单数据
      */
     for (var i = 1; i <= 10; i++) {
-        table[i - 1] = $("#input_" + (i+43) + "").val();
+        table[i - 1] = $("#input_" + (i + 43) + "").val();
     }
 
     /**
@@ -152,8 +175,8 @@ function productDataAndPicture2() {
      */
     for (var i = 1; i <= 5; i++) {
         var data1 = new Array();
-        data1[0] = parseFloat(table[i-1]);
-        data1[1] = parseFloat(table[i-1+5]);
+        data1[0] = parseFloat(table[i - 1]);
+        data1[1] = parseFloat(table[i - 1 + 5]);
         outdataUhs[i - 1] = data1;
     }
 
@@ -170,9 +193,53 @@ function productDataAndPicture2() {
 
     var t = table[0] - table[4];
     var T = table[5] - table[9];
-    var number = Math.abs(t) / Math.abs(T);
+    var number = Math.abs(T) / Math.abs(t);
 
-    $("#input_54").attr("value", number.toFixed(2));
+    $("#input_54").attr("value", number.toFixed(4));
+}
+
+/**
+ *  计算页面均值
+ * @param id 要返回的数值的id（页面）
+ * @param off 起始位置
+ * @param len 长度
+ * @param el 被除数
+ */
+
+/**
+ * @param id
+ * @param off
+ * @param len
+ * @param el
+ */
+
+function add(id, off, len, el) {
+//add("#input_7", 1, 6, 6000);
+    var ret = 0;
+    for (var i = off; i < off + len; i++) {
+        var val = parseFloat($("#input_" + i + "").val());
+        ret += val;
+    }
+    $(id).attr("value", (ret / el).toFixed(4));
+
+    addParameter("#input_54", "#input_57", "#input_34", "#input_41", "#input_42", "#input_43");
+
+}
+
+/**
+ *
+ * @param getElementId 页面获取的 dev T 的id
+ * @param toDataId  赋值
+ * @param hh1Id
+ * @param rr1Id
+ * @param t1Id
+ * @param t2Id
+ */
+function addParameter(getElementId, toDataId, hh1Id, rr1Id, t1Id, t2Id) {
+    var lambda1 = -(0.823 * 385 * parseFloat($(hh1Id).val())) / (3.14 * parseFloat($(rr1Id).val()) * parseFloat($(rr1Id).val())) / (parseFloat($(t2Id).val()) - parseFloat($(t1Id).val())) * (2 * 0.00801 + 0.065) / (2 * 0.00801 + 2 * 0.065) * parseFloat($(getElementId).val());
+    $(toDataId).attr("value", (lambda1).toFixed(3));
+
+
 }
 
 
