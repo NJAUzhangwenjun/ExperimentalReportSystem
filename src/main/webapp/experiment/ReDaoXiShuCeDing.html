@@ -71,14 +71,17 @@
                     </p>
                     <div>
                         A、
-                        <br />
-                        <img style="max-width: 500px; max-height: 500px;" class="img-responsive img-thumbnail" src="./assets/images/10_1.jpeg" alt="" /><br>
+                        <br/>
+                        <img style="max-width: 500px; max-height: 500px;" class="img-responsive img-thumbnail"
+                             src="./assets/images/10_1.jpeg" alt=""/><br>
                         B、
-                        <br />
-                        <img style="max-width: 500px; max-height: 500px;" class="img-responsive img-thumbnail" src="./assets/images/10_2.jpeg" alt="" /><br>
+                        <br/>
+                        <img style="max-width: 500px; max-height: 500px;" class="img-responsive img-thumbnail"
+                             src="./assets/images/10_2.jpeg" alt=""/><br>
                         C、
-                        <br />
-                        <img style="max-width: 500px; max-height: 500px;" class="img-responsive img-thumbnail" src="./assets/images/10_3.jpeg" alt="" /><br>
+                        <br/>
+                        <img style="max-width: 500px; max-height: 500px;" class="img-responsive img-thumbnail"
+                             src="./assets/images/10_3.jpeg" alt=""/><br>
                     </div>
                 </div>
             </div>
@@ -114,8 +117,8 @@
                         </select></p>
                         <br>
                         <br>
-                        <p>A、辐射  B、扩散  </p>
-                        <p>C、导热  D、对流</p><br>
+                        <p>A、辐射 B、扩散 </p>
+                        <p>C、导热 D、对流</p><br>
                     </div>
                     <div>
                         <p>2、(4分) 关于导热系数，以下正确的是<select id="choice_5">
@@ -223,7 +226,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <p>厚度平均值:\(h_B = \)  <input type="text"  id="input_7"> m.</p>
+                            <p>厚度平均值:\(h_B = \) <input type="text" id="input_7" readonly="readonly"> m.</p>
                         </div>
 
                         <div>
@@ -241,9 +244,9 @@
                                     </tr>
                                 </table>
                             </div>
-                            <p>半径平均值:\(R_B = \) <input type="text" id="input_14"> m.</p>
-                            <p>加热盘设定温度\(T_{1} = \) <input type="text" id="input_15">  ℃; </p>
-                            <p>散热盘稳态温度\(T_{2} = \) <input type="text" id="input_16">  ℃; </p>
+                            <p>半径平均值:\(R_B = \) <input type="text" id="input_14" readonly="readonly"> m.</p>
+                            <p>加热盘设定温度\(T_{1} = \) <input type="text" id="input_15"> ℃; </p>
+                            <p>散热盘稳态温度\(T_{2} = \) <input type="text" id="input_16"> ℃; </p>
                             <p>自然冷却数据记录表：</p>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed">
@@ -272,7 +275,9 @@
                                 </div>
                             </div>
                             <button class="btn btn-primary" onclick="productDataAndPicture1()">生成曲线</button>
-                            <p>\(\Delta T / \Delta t =\)  <td><input type="text" id="input_27"></td> ℃/s</p>
+                            <p>\(\Delta T / \Delta t =\)
+                            <td><input type="text" id="input_27"></td>
+                            ℃/s</p>
                         </div>
                     </div>
                     <div>
@@ -293,7 +298,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <p>厚度平均值:\(h_B = \)  <input type="text" id="input_34"> m。</p>
+                            <p>厚度平均值:\(h_B = \) <input type="text" id="input_34" readonly="readonly"> m。</p>
                         </div>
 
                         <div>
@@ -311,9 +316,9 @@
                                     </tr>
                                 </table>
                             </div>
-                            <p>半径平均值:\(R_B = \) <input type="text"  id="input_41"> m.</p>
-                            <p>加热盘设定温度\(T_{1} = \) <input type="text" id="input_42">  ℃; </p>
-                            <p>散热盘稳态温度\(T_{2} = \) <input type="text" id="input_43">  ℃; </p>
+                            <p>半径平均值:\(R_B = \) <input type="text" id="input_41" readonly="readonly"> m.</p>
+                            <p>加热盘设定温度\(T_{1} = \) <input type="text" id="input_42"> ℃; </p>
+                            <p>散热盘稳态温度\(T_{2} = \) <input type="text" id="input_43"> ℃; </p>
                             <p>自然冷却数据记录表：</p>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed">
@@ -342,7 +347,9 @@
                                 </div>
                             </div>
                             <button class="btn btn-primary" onclick="productDataAndPicture2()">生成曲线</button>
-                            <p>\(\Delta T / \Delta t =\)  <td><input type="text" id="input_54"></td> ℃/s</p>
+                            <p>\(\Delta T / \Delta t =\)
+                            <td><input type="text" id="input_54"></td>
+                            ℃/s</p>
                         </div>
                     </div>
                     <div>
@@ -350,18 +357,26 @@
                         <p>散热盘（下铜板）相关参数：</p>
                         <p>比热容：<i>c=0.385kg/(K·kg)</i> &nbsp;半径：\(R_p = {0.065}m;\)</p>
                         <p>质量: <i>m=0.823kg;&nbsp; 厚度:\(h_p = {8.01} × 10^-3 m;\)</i></p>
-                        <p>导热系数：<span><img style="height: 60px;width: 336px" src="./assets/images/10_4.png" alt=""></span></p>
+                        <p>导热系数：<span><img style="height: 60px;width: 336px" src="./assets/images/10_4.png"
+                                           alt=""></span></p>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped table-condensed">
                                 <tr>
                                     <td>样品</td>
-                                    <td>1:<input type="text" id="input_55"></td>
+                                    <td>1:
+                                        <select id="input_55">
+                                            <option value="1">有机玻璃</option>
+                                            <option value="2">硅胶</option>
+                                            <option value="3">木板</option>
+                                        </select>
+                                    </td>
                                     <td>2:石英玻璃</td>
                                 </tr>
                                 <tr>
-                                    <td><img style="height: 22px;width: 84px" src="./assets/images/10_5.png" alt=""></td>
-                                    <td><input type="text" id="input_56"></td>
-                                    <td><input type="text" id="input_57"></td>
+                                    <td><img style="height: 22px;width: 84px" src="./assets/images/10_5.png" alt="">
+                                    </td>
+                                    <td><input type="text" id="input_56" readonly="readonly"></td>
+                                    <td><input type="text" id="input_57" readonly="readonly"></td>
                                 </tr>
                             </table>
                         </div>
@@ -389,18 +404,22 @@
         width: 80px;
         height: 30px;
     }
+
     img {
         height: 100%;
         width: 100%;
     }
+
     select {
         width: 60px;
         height: 25px;
     }
+
     * {
         font-size: 20px;
     }
-    td{
+
+    td {
         text-align: center
     }
 </style>
@@ -411,7 +430,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-<script src="../assets/js/biz/ReDaoXiShuCeDing.js" ></script>
+<script src="../assets/js/biz/ReDaoXiShuCeDing.js"></script>
 <script src="../assets/js/ecStat.js"></script>
 <script src="../assets/js/biz/myChats/charts10.js"></script>
 

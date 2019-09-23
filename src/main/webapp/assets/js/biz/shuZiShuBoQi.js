@@ -1,4 +1,3 @@
-
 $(function () {
         $.ajax({
             type: "GET",
@@ -26,14 +25,14 @@ $(function () {
             },
             dataType: "json",
             success: function (res) {
-                if(res.status === 0){
+                if (res.status === 0) {
                     //用户未提交过此实验
                 } else if (res.status === 2) {
                     location.href = "../login.html";
-                } else if(res.status === 15){
+                } else if (res.status === 15) {
                     alert("您已提交过此实验，如有疑问请联系实验老师");
                     location.href = "../index.html";
-                } else{
+                } else {
                     alert("服务器发生错误");
                 }
             },
@@ -42,7 +41,7 @@ $(function () {
             }
         });
     }
-)
+);
 
 
 

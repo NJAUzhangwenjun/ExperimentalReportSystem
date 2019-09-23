@@ -220,27 +220,22 @@ function productDataAndPicture2() {
     $("#blank_4").attr("value", myRegression.parameter.gradient.toFixed(2));
 }
 
-function getData() {
+/*function getData() {
     var table = new Array();
     var table_out = new Array();
     var table_outB = new Array();
 
-    /**
+    /!**
      * 获取表单数据
-     */
+     *!/
     for (var i = 1, j = 0; i <= 6; i++) {
         table[j++] = $("#table3_" + i + "").val();
     }
 
-    /**
+    /!**
      * 将表单数据放入输出变量中
-     */
+     *!/
 
-    // for (var i = 1, j = 0; i < 6  ; i+=2) {
-    //     $("#table3_" + (i + 6)+"").attr("value", Math.abs(table[i+1] - table[i]));
-    //     $("#table3_" + (i + 7)+"").attr("value", Math.tan(Math.abs(table[i+1] - table[i]) * Math.PI / 180));
-    //
-    // }
 
 
     {
@@ -261,6 +256,68 @@ function getData() {
 
     }
     $("#table3_" + 13 + "").attr("value", (((Math.tan(Math.abs(table[1] - table[0]) * Math.PI / 180)) + Math.tan(Math.abs(table[2] - table[3]) * Math.PI / 180) + Math.tan(Math.abs(table[4] - table[5]) * Math.PI / 180)) / 3).toFixed(2));
+}*/
+
+function getData() {
+    // var table = new Array();
+    // var table_out = new Array();
+    // var table_outB = new Array();
+
+    /**
+     * 获取表单数据
+     */
+
+
+    /**
+     * 将表单数据放入输出变量中
+     */
+
+        // for (var i = 1, j = 0; i < 6  ; i+=2) {
+        //     $("#table3_" + (i + 6)+"").attr("value", Math.abs(table[i+1] - table[i]));
+        //     $("#table3_" + (i + 7)+"").attr("value", Math.tan(Math.abs(table[i+1] - table[i]) * Math.PI / 180));
+        //
+        // }
+
+    var x1 = parseFloat($("#table3_1").val());
+    var x2 = parseFloat($("#table3_2").val());
+    var x3 = parseFloat($("#table3_3").val());
+    var x4 = parseFloat($("#table3_4").val());
+    var x5 = parseFloat($("#table3_5").val());
+    var x6 = parseFloat($("#table3_6").val());
+    var y1 = Math.abs(x1 - x2) > 250 ? 360 - Math.abs(x1 - x2) : Math.abs(x1 - x2);
+    var y2 = Math.abs(x3 - x4) > 250 ? 360 - Math.abs(x3 - x4) : Math.abs(x3 - x4);
+    var y3 = Math.abs(x5 - x6) > 250 ? 360 - Math.abs(x5 - x6) : Math.abs(x5 - x6);
+    $("#table3_7").val(y1);
+    $("#table3_9").val(y2);
+    $("#table3_11").val(y3);
+    var z1 = parseFloat($("#table3_7").val());
+    var z2 = parseFloat($("#table3_9").val());
+    var z3 = parseFloat($("#table3_11").val());
+    var t1 = Math.tan(Math.abs(z1) * Math.PI / 180).toFixed(3);
+    var t2 = Math.tan(Math.abs(z2) * Math.PI / 180).toFixed(3);
+    var t3 = Math.tan(Math.abs(z3) * Math.PI / 180).toFixed(3);
+    $("#table3_8").val(t1);
+    $("#table3_10").val(t2);
+    $("#table3_12").val(t3);
+    var m1 = parseFloat($("#table3_8").val());
+    var m2 = parseFloat($("#table3_10").val());
+    var m3 = parseFloat($("#table3_12").val());
+    var n = Math.abs((m1 + m2 + m3) / 3).toFixed(3);
+    $("#table3_13").val(n);
+
+    // var y1 = Math.abs(table[0] - table[1])>300 ? 360-Math.abs(table[0] - table[1]):Math.abs(table[0] - table[1])
+    // $("#table3_11").attr("value", Math.abs(y1));
+    // $("#table3_12").attr("value", Math.tan(Math.abs(y1) * Math.PI / 180));
+    //
+    // var y2 = Math.abs(table[2] - table[3])>300 ? 360-Math.abs(table[2] - table[3]):Math.abs(table[2] - table[3])
+    // $("#table3_11").attr("value", Math.abs(y2));
+    // $("#table3_12").attr("value", Math.tan(Math.abs(y2) * Math.PI / 180));
+    //
+    // var y3 = Math.abs(table[4] - table[5])>300 ? 360-Math.abs(table[4] - table[5]):Math.abs(table[4] - table[5])
+    // $("#table3_11").attr("value", Math.abs(y3));
+    // $("#table3_12").attr("value", Math.tan(Math.abs(y3) * Math.PI / 180));
+    //
+    // $("#table3_13").attr("value", ( Math.tan(Math.abs(y1) * Math.PI / 180) +Math.tan(Math.abs(y2) * Math.PI / 180) +Math.tan(Math.abs(y3) * Math.PI / 180)) / 3 .toFixed(3));
 }
 
 
