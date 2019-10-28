@@ -60,6 +60,7 @@ function submit() {
     var table2 = new Array();
     var table3 = new Array();
     var blank = new Array();
+    var exp = new Array();
     // var chart1 = new Array();
 
 
@@ -78,18 +79,13 @@ function submit() {
         table3[i - 1] = $("#table3_" + i + "").val();
     }
 
-    /**
-     * 测试blank
-     * */
-    // alert("blank=============");//---------------------------------------------------
+    for (var i = 1; i <= 4; i++) {
+        exp[i - 1] = $("#exp" + i + "").val();
+    }
+
     for (var i = 1; i <= 4; i++) {
         blank[i - 1] = $("#blank_" + i + "").val();
     }
-
-
-    // for (var i = 0; i < blank.length; i++) {
-    //     alert("blank_______==="+blank[i]);
-    // }
 
     $.ajax({
         type: "POST",
@@ -100,7 +96,7 @@ function submit() {
             table1: table1,
             table2: table2,
             table3: table3,
-            // chart1: chart1,
+            exp: exp
         },
         async: false,
         dataType: "json",
@@ -162,6 +158,12 @@ function productDataAndPicture1() {
      */
     myRegression = ecStat.regression('linear', outdataUhs);
 
+
+    /**
+     *计算残差平方和
+     */
+    var R2 = getR2(outdataUhs, myRegression);
+
     /**
      * 图像自动生成
      */
@@ -171,6 +173,12 @@ function productDataAndPicture1() {
      * 赋值表达式和参数
      */
     $("#blank_2").attr("value", myRegression.parameter.gradient.toFixed(2));
+
+    /**
+     * 赋值表达式和参数
+     */
+    $("#exp1").attr("value", myRegression.expression);
+    $("#exp2").attr("value", R2.toFixed(2));
 }
 
 
@@ -209,6 +217,13 @@ function productDataAndPicture2() {
      */
     myRegression = ecStat.regression('linear', outdataUhs);
 
+
+    /**
+     *计算残差平方和
+     */
+    var R2 = getR2(outdataUhs, myRegression);
+
+
     /**
      * 图像自动生成
      */
@@ -218,45 +233,51 @@ function productDataAndPicture2() {
      * 赋值表达式和参数
      */
     $("#blank_4").attr("value", myRegression.parameter.gradient.toFixed(2));
+
+    /**
+     * 赋值表达式和参数
+     */
+    $("#exp3").attr("value", myRegression.expression);
+    $("#exp4").attr("value", R2.toFixed(2));
 }
 
-/*function getData() {
-    var table = new Array();
-    var table_out = new Array();
-    var table_outB = new Array();
+/**
+ * 计算R2的值
+ * @param outdataUhs
+ * @param myRegression
+ * @returns {number}
+ */
+function getR2(outdataUhs, myRegression) {
 
-    /!**
-     * 获取表单数据
-     *!/
-    for (var i = 1, j = 0; i <= 6; i++) {
-        table[j++] = $("#table3_" + i + "").val();
+    var CanChaPingFangHe = 0.0;
+    var ZongPingFangHe = 0.0;
+    var r2 = 0.0;
+
+    var y1 = 0;
+    for (var i = 0; i < outdataUhs.length-1; i++) {
+        var y = outdataUhs[i][1];
+        y1 = y1 + y;
     }
+    y1 = y1 / 10;
+    for (var i = 0; i < outdataUhs.length-1; i++) {
+        /**
+         * 曲线计算参数
+         */
+        var Y = myRegression.parameter.gradient * outdataUhs[i][0] + myRegression.parameter.intercept;
+        /**
+         * 实际参数
+         */
 
-    /!**
-     * 将表单数据放入输出变量中
-     *!/
-
-
-
-    {
-        var i = 1;
-        $("#table3_" + 7 + "").attr("value", Math.abs(table[1] - table[0]));
-        $("#table3_" + 8 + "").attr("value", Math.tan(Math.abs(table[1] - table[0]) * Math.PI / 180));
+        var y = outdataUhs[i][1];
+        CanChaPingFangHe += (y - Y) * (y - Y);
+        ZongPingFangHe += (y - y1) * (y - y1);
+        r2 = 1 - CanChaPingFangHe / ZongPingFangHe;
+        if (isNaN(r2)) {
+            r2 = -1;
+        }
     }
-    {
-        var i = 3;
-        $
-        ("#table3_" + 9 + "").attr("value", Math.abs(table[2] - table[3]));
-        $("#table3_" + 10 + "").attr("value", Math.tan(Math.abs(table[2] - table[3]) * Math.PI / 180));
-    }
-    {
-        var i = 5;
-        $("#table3_" + 11 + "").attr("value", Math.abs(table[4] - table[5]));
-        $("#table3_" + 12 + "").attr("value", Math.tan(Math.abs(table[4] - table[5]) * Math.PI / 180));
-
-    }
-    $("#table3_" + 13 + "").attr("value", (((Math.tan(Math.abs(table[1] - table[0]) * Math.PI / 180)) + Math.tan(Math.abs(table[2] - table[3]) * Math.PI / 180) + Math.tan(Math.abs(table[4] - table[5]) * Math.PI / 180)) / 3).toFixed(2));
-}*/
+    return r2;
+}
 
 function getData() {
     // var table = new Array();

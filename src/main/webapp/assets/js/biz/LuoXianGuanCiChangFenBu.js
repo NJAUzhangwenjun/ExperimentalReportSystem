@@ -158,12 +158,15 @@ function productDataAndPicture1() {
      * 点数据
      */
 
-    for (var i = 1; i <= table_out.length; i++) {
-        var tableOutId = "#table_out_" + i;
-        var data1 = new Array();
-        data1[0] = i;
-        data1[1] = parseFloat($(tableOutId).val());
-        outdataUhs[i - 1] = data1;
+    for (var i = 1; i <= table_out.length - 2; i++) {
+
+        if (i < 7) {
+            var tableOutId = "#table_out_" + i;
+            var data1 = new Array();
+            data1[0] = i;
+            data1[1] = parseFloat($(tableOutId).val());
+            outdataUhs[i - 1] = data1;
+        }
     }
 
 
@@ -217,6 +220,8 @@ function productDataAndPicture2() {
         }
 
     }
+
+
     /**
      * 输出表单变量值
      */
@@ -229,12 +234,15 @@ function productDataAndPicture2() {
      * 点数据
      */
 
-    for (var i = 1; i <= table_out.length; i++) {
-        var tableOutId = "#table_out_" + (i + 8) + "";
-        var data1 = new Array();
-        data1[0] = i;
-        data1[1] = parseFloat($(tableOutId).val());
-        outdataUhs[i - 1] = data1;
+    for (var i = 1; i <= table_out.length - 2; i++) {
+        if (i < 7 || i > 8 || i < 15 || i > 16) {
+            var tableOutId = "#table_out_" + (i + 8) + "";
+            var data1 = new Array();
+            data1[0] = i;
+            data1[1] = parseFloat($(tableOutId).val());
+            outdataUhs[i - 1] = data1;
+        }
+
     }
 
 
@@ -303,9 +311,9 @@ function productDataAndPicture3() {
     for (var i = 1; i <= table_out.length; i++) {
         var tableOutId = "#table_out_" + (i + 16) + "";
         if (i % 2 === 0) {
-            $(tableOutId).attr("value", 1000 * Math.round(table_out[i - 1] * 100) / 100);
+            $(tableOutId).attr("value", 1000 * Math.round(table_out[i - 1] * 100000) / 100000);
         } else {
-            $(tableOutId).attr("value", Math.round(table_out[i - 1] * 100) / 100);
+            $(tableOutId).attr("value", Math.round(table_out[i - 1] * 100000) / 100000);
         }
     }
     /**
@@ -319,7 +327,7 @@ function productDataAndPicture3() {
             if (isNaN(outdataUhs[j])) {
                 outdataUhs[j] = 0;
             }
-            outdataUhs[j] = Math.round(outdataUhs[j] * 100) / 100;
+            outdataUhs[j] = Math.round(outdataUhs[j] * 100000) / 100000;
         }
     }
 
@@ -339,7 +347,12 @@ function getR2(outdataUhs, myRegression) {
     var ZongPingFangHe = 0.0;
     var r2 = 0.0;
 
-
+    var y1 = 0;
+    for (var i = 0; i < outdataUhs.length; i++) {
+        var y = outdataUhs[i][1];
+        y1 = y1 + y;
+    }
+    y1 = y1 / 6;
     for (var i = 0; i < outdataUhs.length; i++) {
         /**
          * 曲线计算参数
@@ -348,10 +361,11 @@ function getR2(outdataUhs, myRegression) {
         /**
          * 实际参数
          */
+
         var y = outdataUhs[i][1];
         CanChaPingFangHe += (y - Y) * (y - Y);
-        ZongPingFangHe += y * y;
-        r2 = (ZongPingFangHe - CanChaPingFangHe) / ZongPingFangHe;
+        ZongPingFangHe += (y - y1) * (y - y1);
+        r2 = 1 - CanChaPingFangHe / ZongPingFangHe;
         if (isNaN(r2)) {
             r2 = -1;
         }

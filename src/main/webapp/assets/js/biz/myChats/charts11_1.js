@@ -56,7 +56,6 @@ function becomeEcharts(optionNum, mainId, outdataUhs, myRegression) {
         xAxis: [
             {
                 min: 1,
-                max: 8,
                 interval: 1,
                 axisLabel: {
                     formatter: '{value} '
@@ -134,12 +133,9 @@ function becomeEcharts(optionNum, mainId, outdataUhs, myRegression) {
         xAxis: [
             {
                 min: 1,
-                max: 8,
                 interval: 1,
                 axisLabel: {
-                    formatter: function (value) {
-                        return value / 10;
-                    }
+                    formatter: '{value} '
                 },
                 name: "I/A",
 
