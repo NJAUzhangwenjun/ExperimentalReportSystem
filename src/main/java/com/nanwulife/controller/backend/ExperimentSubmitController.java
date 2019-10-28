@@ -592,6 +592,7 @@ public class ExperimentSubmitController {
         params.put("num", user.getStuNum());
         params.put("classno", major_name + user.getStuClass());
         params.put("score", rank);
+        params.put("pic1", new PictureRenderData(625, 326, basePath + chartPath + user.getStuNum() + "/6-1.png"));
         //=============================模板标记==============================
 
         path = basePath + wordPath + "碰撞打靶" + "/" + major_name + stu_class + "/";
