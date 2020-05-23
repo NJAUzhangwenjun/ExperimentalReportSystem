@@ -78,7 +78,25 @@ public class ScoreManageController {
             return ServerResponse.createByErrorCodeMessage(Const.ResponseCode.ILLEGAL_ARGUMENT.getCode(), Const.ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         return iScoreService.getScoreListByMajor(majorId, stuClass, expId, isExport, orderBy);
     }
-    
+
+
+    @RequestMapping(value = "get_scorelist_major1.do", method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse getScoreList1(HttpSession session,  @RequestParam("majorId") Integer majorId, @RequestParam(value="stuClass", required = false) Integer stuClass, @RequestParam(value="expId", defaultValue="0") Integer expId, @RequestParam(value="isExport", defaultValue="0") Integer isExport, @RequestParam("orderBy") String orderBy){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServerResponse.createByErrorCodeMessage(Const.ResponseCode.NEED_LOGIN.getCode(), Const.ResponseCode.NEED_LOGIN.getDesc());
+        }
+        if(user.getRole() == Const.Role.ROLE_CUSTOMER){
+            return ServerResponse.createByErrorCodeMessage(Const.ResponseCode.INSUFFICIENT_PERMISSION.getCode(), Const.ResponseCode.INSUFFICIENT_PERMISSION.getDesc());
+        }
+        if(majorId == null)
+            return ServerResponse.createByErrorCodeMessage(Const.ResponseCode.ILLEGAL_ARGUMENT.getCode(), Const.ResponseCode.ILLEGAL_ARGUMENT.getDesc());
+        return iScoreService.getScoreListByMajor1(majorId, stuClass, expId, isExport, orderBy);
+    }
+
+
+
 }
 
 

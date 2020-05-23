@@ -226,6 +226,8 @@ public class ExperimentSubmitController {
             params.put("result_" + (i + 1) + "", result[i]);
         }
 
+
+
         params.put("pic1", new PictureRenderData(625, 326, basePath + chartPath + user.getStuNum() + "/2-1.png"));
         params.put("pic2", new PictureRenderData(625, 326, basePath + chartPath + user.getStuNum() + "/2-2.png"));
         params.put("pic3", new PictureRenderData(625, 326, basePath + chartPath + user.getStuNum() + "/2-3.png"));
@@ -239,6 +241,9 @@ public class ExperimentSubmitController {
         params.put("classno", major_name + user.getStuClass());
         params.put("score", rank);
 
+//        System.out.println(
+//                JSON.toJSONString(params)+"----------------------------------------------------"
+//        );
         path = basePath + wordPath + "太阳能实验" + "/" + major_name + stu_class + "/";
         File filedir = new File(path);
         if (!filedir.exists()) {

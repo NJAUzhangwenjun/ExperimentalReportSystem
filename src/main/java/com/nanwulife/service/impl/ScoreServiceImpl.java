@@ -5,7 +5,6 @@ import com.nanwulife.common.ServerResponse;
 import com.nanwulife.dao.ScoreMapper;
 import com.nanwulife.pojo.Score;
 import com.nanwulife.service.IScoreService;
-import com.nanwulife.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,41 +27,45 @@ public class ScoreServiceImpl implements IScoreService {
     @Autowired
     ScoreMapper scoreMapper;
 
-    public ServerResponse isStuHaveScore(Integer expId, Integer userId){
+    @Override
+    public ServerResponse isStuHaveScore(Integer expId, Integer userId) {
         Score score = new Score();
         score.setStuId(userId);
         score.setExpId(expId);
         Score response = scoreMapper.selectByPrimaryKey(score);
-        if(response == null){
+        if (response == null) {
             //分数表中无记录，用户没提交过
             return ServerResponse.createBySuccess();
         }
         return ServerResponse.createByErrorCodeMessage(Const.ResponseCode.SCORE_ALREADY_EXITS.getCode(), Const.ResponseCode.SCORE_ALREADY_EXITS.getDesc());
     }
 
+    @Override
     public ServerResponse submit(Score record) {
         scoreMapper.insert(record);
         return ServerResponse.createBySuccess();
     }
 
-    public ServerResponse deleteScore(Integer stuId, Integer expId){
+    @Override
+    public ServerResponse deleteScore(Integer stuId, Integer expId) {
         Score score = new Score();
         score.setExpId(expId);
         score.setStuId(stuId);
         int count = scoreMapper.deleteByPrimaryKey(score);
-        if(count == 0){
+        if (count == 0) {
             return ServerResponse.createByError();
         }
         return ServerResponse.createBySuccess();
     }
 
-    public ServerResponse getScoreListByStunum(Long userId, Integer expId, Integer isExport){
+    @Override
+    public ServerResponse getScoreListByStunum(Long userId, Integer expId, Integer isExport) {
         String basePath = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         Date date = new Date();
         String filename = sdf.format(date) + ".xls";
-        if(isExport == 1){
-            if(System.getProperty("os.name").toLowerCase().contains("linux")){
+        if (isExport == 1) {
+            if (System.getProperty("os.name").toLowerCase().contains("linux")) {
                 basePath = "/var/lib/mysql-files/";
             } else {
                 basePath = "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/";
@@ -71,18 +74,19 @@ public class ScoreServiceImpl implements IScoreService {
         return ServerResponse.createBySuccess(scoreMapper.getScoreListByStunum(userId, expId, isExport, basePath + filename));
     }
 
-    public ServerResponse getScoreListByMajor(Integer majorId, Integer stuClass, Integer expId, Integer isExport, String orderBy){
+    @Override
+    public ServerResponse getScoreListByMajor(Integer majorId, Integer stuClass, Integer expId, Integer isExport, String orderBy) {
         String basePath = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         Date date = new Date();
         String filename = sdf.format(date) + ".xls";
-        if(orderBy.equals("stu_num_asc"))
+        if (orderBy.equals("stu_num_asc"))
             orderBy = "stu_num asc";
-        else 
+        else
             orderBy = orderBy.replace("_", " ");
         System.out.println(orderBy);
-        if(isExport == 1){
-            if(System.getProperty("os.name").toLowerCase().contains("linux")){
+        if (isExport == 1) {
+            if (System.getProperty("os.name").toLowerCase().contains("linux")) {
                 basePath = "/var/lib/mysql-files/";
             } else {
                 basePath = "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/";
@@ -90,6 +94,26 @@ public class ScoreServiceImpl implements IScoreService {
         }
         System.out.println(basePath + filename);
         return ServerResponse.createBySuccess(scoreMapper.getScoreListByMajor(majorId, stuClass, expId, isExport, orderBy, basePath + filename));
-        
+
     }
+
+
+    /**
+     * 组合查询（平均分）
+     *
+     * @param majorId
+     * @param stuClass
+     * @param expId
+     * @param isExport
+     * @param orderBy
+     * @return
+     */
+    @Override
+    public ServerResponse getScoreListByMajor1(Integer majorId, Integer stuClass, Integer expId, Integer isExport, String orderBy) {
+
+        return ServerResponse.createBySuccess(scoreMapper.getScoreListByMajor1(majorId, stuClass, expId, isExport, orderBy));
+
+    }
+
+
 }

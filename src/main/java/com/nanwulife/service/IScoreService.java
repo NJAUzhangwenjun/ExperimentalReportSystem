@@ -2,7 +2,6 @@ package com.nanwulife.service;
 
 import com.nanwulife.common.ServerResponse;
 import com.nanwulife.pojo.Score;
-import com.nanwulife.vo.StuBasicInfoVo;
 
 public interface IScoreService {
 
@@ -15,5 +14,8 @@ public interface IScoreService {
     ServerResponse getScoreListByStunum(Long userId, Integer expId, Integer isExport);
 
     ServerResponse getScoreListByMajor(Integer majorId, Integer stuClass, Integer expId, Integer isExport, String orderBy);
+
+    ServerResponse getScoreListByMajor1(Integer majorId, Integer stuClass, Integer expId, Integer isExport, String orderBy);
+
 
 }

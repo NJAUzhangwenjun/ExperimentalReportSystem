@@ -1,114 +1,153 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.nanwulife.dao.ScoreMapper" >
-  <resultMap id="BaseResultMap" type="com.nanwulife.pojo.Score" >
-    <constructor >
-      <idArg column="stu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <idArg column="exp_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="score" jdbcType="SMALLINT" javaType="java.lang.Integer" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
-    stu_id, exp_id, score
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.nanwulife.pojo.Score" >
-    select 
-    <include refid="Base_Column_List" />
-    from score
-    where stu_id = #{stuId,jdbcType=INTEGER}
-      and exp_id = #{expId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.nanwulife.pojo.Score" >
-    delete from score
-    where stu_id = #{stuId,jdbcType=INTEGER}
-      and exp_id = #{expId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.nanwulife.pojo.Score" >
-    insert into score (stu_id, exp_id, score
-      )
-    values (#{stuId,jdbcType=INTEGER}, #{expId,jdbcType=INTEGER}, #{score,jdbcType=SMALLINT}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.nanwulife.pojo.Score" >
-    insert into score
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="stuId != null" >
-        stu_id,
-      </if>
-      <if test="expId != null" >
-        exp_id,
-      </if>
-      <if test="score != null" >
-        score,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="stuId != null" >
-        #{stuId,jdbcType=INTEGER},
-      </if>
-      <if test="expId != null" >
-        #{expId,jdbcType=INTEGER},
-      </if>
-      <if test="score != null" >
-        #{score,jdbcType=SMALLINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.nanwulife.pojo.Score" >
-    update score
-    <set >
-      <if test="score != null" >
-        score = #{score,jdbcType=SMALLINT},
-      </if>
-    </set>
-    where stu_id = #{stuId,jdbcType=INTEGER}
-      and exp_id = #{expId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.nanwulife.pojo.Score" >
-    update score
-    set score = #{score,jdbcType=SMALLINT}
-    where stu_id = #{stuId,jdbcType=INTEGER}
-      and exp_id = #{expId,jdbcType=INTEGER}
-  </update>
-  
-  <select id="getScoreListByStunum" parameterType="Map" resultType="com.nanwulife.vo.ScoreStuInfoVo">
-    SELECT stu_num, stu_name, e.name as expName, m.name as majorName, stu_class as stuClass, score
-    <if test="isExport != 1">
-      , e.id as expId, u.id as stuId
-    </if>
-    <if test="isExport == 1">
-      into outfile #{path}
-    </if>
-    FROM user u, experiment e, score s, major m
-    WHERE u.id = s.stu_id 
-    AND s.exp_id = e.id
-    AND u.stu_num = #{userId,jdbcType=BIGINT}
-    AND u.major_id=m.id
-    <if test="expId != 0">
-      AND e.id = #{expId,jdbcType=INTEGER}
-    </if>
-  </select>
-  
-  
-  <select id="getScoreListByMajor" parameterType="Map" resultType="com.nanwulife.vo.ScoreStuInfoVo">
-    SELECT stu_num, stu_name, major.name as majorName, stu_class, exp.name as expName, score
-    <if test="isExport != 1">
-      , exp.id as expId, u.id as stuId
-    </if>
-    <if test="isExport == 1">
-      into outfile #{path}
-    </if>
-    FROM user u, major, experiment exp, score s
-    WHERE u.major_id = major.id
-    AND s.stu_id = u.id
-    AND exp.id = s.exp_id
-    AND u.major_id = #{majorId,jdbcType=INTEGER}
-    <if test="expId != 0">
-      AND exp.id = #{expId,jdbcType=INTEGER}
-    </if>
-    <if test="stuClass != null">
-      AND stu_class = #{stuClass, jdbcType=INTEGER}
-    </if>
-    ORDER BY #{orderBy}
-  </select>
+<mapper namespace="com.nanwulife.dao.ScoreMapper">
+	<resultMap id="BaseResultMap" type="com.nanwulife.pojo.Score">
+		<constructor>
+			<idArg column="stu_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+			<idArg column="exp_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+			<arg column="score" jdbcType="SMALLINT" javaType="java.lang.Integer"/>
+		</constructor>
+	</resultMap>
+	<sql id="Base_Column_List">
+			stu_id,
+			exp_id,
+			score
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.nanwulife.pojo.Score">
+		select
+		<include refid="Base_Column_List"/>
+		from score
+		where stu_id = #{stuId,jdbcType=INTEGER}
+		and exp_id = #{expId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="com.nanwulife.pojo.Score">
+		delete from score
+		where stu_id = #{stuId,jdbcType=INTEGER}
+		and exp_id = #{expId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.nanwulife.pojo.Score">
+		insert into score (stu_id, exp_id, score
+		)
+		values (#{stuId,jdbcType=INTEGER}, #{expId,jdbcType=INTEGER}, #{score,jdbcType=SMALLINT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.nanwulife.pojo.Score">
+		insert into score
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="stuId != null">
+				stu_id,
+			</if>
+			<if test="expId != null">
+				exp_id,
+			</if>
+			<if test="score != null">
+				score,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="stuId != null">
+				#{stuId,jdbcType=INTEGER},
+			</if>
+			<if test="expId != null">
+				#{expId,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=SMALLINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.nanwulife.pojo.Score">
+		update score
+		<set>
+			<if test="score != null">
+				score = #{score,jdbcType=SMALLINT},
+			</if>
+		</set>
+		where stu_id = #{stuId,jdbcType=INTEGER}
+		and exp_id = #{expId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.nanwulife.pojo.Score">
+		update score
+		set score = #{score,jdbcType=SMALLINT}
+		where stu_id = #{stuId,jdbcType=INTEGER}
+		and exp_id = #{expId,jdbcType=INTEGER}
+	</update>
+	
+	<select id="getScoreListByStunum" parameterType="Map" resultType="com.nanwulife.vo.ScoreStuInfoVo">
+		SELECT stu_num, stu_name, e.name as expName, m.name as majorName, stu_class as stuClass, score
+		<if test="isExport != 1">
+			, e.id as expId, u.id as stuId
+		</if>
+		<if test="isExport == 1">
+			into outfile #{path}
+		</if>
+		FROM user u, experiment e, score s, major m
+		WHERE u.id = s.stu_id
+		AND s.exp_id = e.id
+		AND u.stu_num = #{userId,jdbcType=BIGINT}
+		AND u.major_id=m.id
+		<if test="expId != 0">
+			AND e.id = #{expId,jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	
+	<select id="getScoreListByMajor" parameterType="Map" resultType="com.nanwulife.vo.ScoreStuInfoVo">
+		SELECT stu_num, stu_name, major.name as majorName, stu_class, exp.name as expName, score
+		<if test="isExport != 1">
+			, exp.id as expId, u.id as stuId
+		</if>
+		<if test="isExport == 1">
+			into outfile #{path}
+		</if>
+		FROM user u, major, experiment exp, score s
+		WHERE u.major_id = major.id
+		AND s.stu_id = u.id
+		AND exp.id = s.exp_id
+		AND u.major_id = #{majorId,jdbcType=INTEGER}
+		<if test="expId != 0">
+			AND exp.id = #{expId,jdbcType=INTEGER}
+		</if>
+		<if test="stuClass != null">
+			AND stu_class = #{stuClass, jdbcType=INTEGER}
+		</if>
+		ORDER BY #{orderBy}
+	</select>
+	
+	
+	<select id="getScoreListByMajor1" parameterType="Map" resultType="com.nanwulife.vo.ScoreStuInfoVo1">
+		SELECT stu_num,
+		stu_name,
+		major.name AS majorName,
+		stu_class,
+		es.*
+		FROM `user` u
+		LEFT JOIN
+		(SELECT s.stu_id stuId,
+		MAX(CASE e.name WHEN '光电效应实验' THEN s.score ELSE 0 END) gd,
+		MAX(CASE e.name WHEN '太阳能实验' THEN s.score ELSE 0 END) ty,
+		MAX(CASE e.name WHEN '光栅衍射及光波波长的测定' THEN s.score ELSE 0 END) gs,
+		MAX(CASE e.name WHEN '杨氏模量实验' THEN s.score ELSE 0 END) ys,
+		MAX(CASE e.name WHEN '转动惯量实验' THEN s.score ELSE 0 END) zd,
+		MAX(CASE e.name WHEN '碰撞打靶实验' THEN s.score ELSE 0 END) pz,
+		MAX(CASE e.name WHEN '牛顿环实验' THEN s.score ELSE 0 END) nd,
+		MAX(CASE e.name WHEN '光偏振实验' THEN s.score ELSE 0 END) gp,
+		MAX(CASE e.name WHEN '数字示波器' THEN s.score ELSE 0 END) sb,
+		MAX(CASE e.name WHEN '导热系数的测定' THEN s.score ELSE 0 END) dr,
+		MAX(CASE e.name WHEN '霍尔效应法测定螺线管磁场分布' THEN s.score ELSE 0 END) lx,
+		format(AVG(s.score), 2) avg,
+		COUNT( * ) count
+		FROM experiment e
+		LEFT OUTER JOIN score s ON e.`id` = s.exp_id
+		GROUP BY s.stu_id) es
+		ON es.stuId = u.id,
+		major
+		
+		WHERE u.major_id = major.id
+		AND u.major_id = #{majorId,jdbcType=INTEGER}
+		<if test="stuClass != null">
+			AND stu_class = #{stuClass, jdbcType=INTEGER}
+		</if>
+		ORDER BY #{orderBy};
+	</select>
 </mapper>
