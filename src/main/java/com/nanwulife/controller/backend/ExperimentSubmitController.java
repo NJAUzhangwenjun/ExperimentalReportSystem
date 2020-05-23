@@ -538,7 +538,10 @@ public class ExperimentSubmitController {
 
     @RequestMapping(value = "Exp_06.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse submitExp(HttpSession session, @RequestParam(value = "choice[]", required = false) String[] choice, @RequestParam(value = "blank[]", required = false) String[] blank, @RequestParam(value = "table1[]", required = false) String[] table1, @RequestParam(value = "table2[]", required = false) String[] table2) {
+    public ServerResponse submitExp(HttpSession session, @RequestParam(value = "choice[]", required = false) String[] choice,
+                                    @RequestParam(value = "blank[]", required = false) String[] blank,
+                                    @RequestParam(value = "table1[]", required = false) String[] table1,
+                                    @RequestParam(value = "table2[]", required = false) String[] table2) {
 
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
@@ -620,6 +623,7 @@ public class ExperimentSubmitController {
         user = null;
         return iScoreService.submit(score);
     }
+
 
     @RequestMapping(value = "Exp_07.do", method = RequestMethod.POST)
     @ResponseBody

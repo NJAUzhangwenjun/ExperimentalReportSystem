@@ -366,9 +366,9 @@ function getR2(outdataUhs, myRegression) {
         CanChaPingFangHe += (y - Y) * (y - Y);
         ZongPingFangHe += (y - y1) * (y - y1);
         r2 = 1 - CanChaPingFangHe / ZongPingFangHe;
-        if (isNaN(r2)) {
-            r2 = -1;
-        }
+        // if (isNaN(r2)) {
+        //     r2 = -1;
+        // }
     }
     return r2;
 }

@@ -39,7 +39,7 @@ public class LuoXianGuanCiChangFenBu {
 		}
 
 		for (int i = 0; i < blank.length; i++) {
-			if (blank[i].isEmpty()) {
+			if (blank[i].isEmpty()||blank[i].equals("NaN")||blank[i]==null) {
 				/** -0.0 表示考生没填*/
 				blank[i] = "-1000";
 			}
